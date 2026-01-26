@@ -1,0 +1,37 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 5%;
+  box-sizing: border-box;
+}
+
+.fullscreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  background: rgba(245, 243, 238, 0.6); /* global bg 톤과 맞춤 */
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(0, 0, 0, 0.7);
+  animation: spin 0.9s linear infinite;
+}
+
+.text {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
