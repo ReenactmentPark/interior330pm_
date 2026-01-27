@@ -1,0 +1,77 @@
+/* InteriorHeaderSection.module.css */
+.header {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.desc {
+  margin-top: 12px;
+  margin-bottom: 80px;
+  font-size: 18px;
+  color: #2e2e2e;
+}
+
+/* Frame 30 */
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+  gap: 20px;
+
+  width: 100%;
+}
+
+/* 카테고리 버튼 */
+.filterItem {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%; /* = 25px */
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  color: #B9B5AF;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Rectangle (짝대기) */
+.filterItem::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+
+  background: #B9B5AF;
+
+  /* gap 20px 중간 정렬 역할 */
+  margin-left: 20px;
+}
+
+/* 마지막은 제거 */
+.filterItem:last-child::after {
+  display: none;
+}
+
+/* 활성 (전체보기 등) */
+.active {
+  color: #7A6A5A;
+}

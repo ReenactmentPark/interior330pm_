@@ -1,0 +1,499 @@
+{
+  "page": "interior",
+  "version": 3,
+  "updatedAt": "2026-01-27T00:00:00.000Z",
+  "headerText": {
+    "title": "인테리어디자인",
+    "description": "목재의 질감과 공간의 구조를 살려 차분하고 완성도 높은 공간을 만듭니다."
+  },
+  "categories": [
+    { "key": "all", "label": "전체보기" },
+    { "key": "cafe", "label": "카페" },
+    { "key": "restaurant", "label": "음식점" },
+    { "key": "commercial", "label": "상가" },
+    { "key": "apartment", "label": "아파트" },
+    { "key": "etc", "label": "기타" }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "category": "restaurant",
+      "title": "[부산 사하구] 스시바 하나 2호점",
+      "period": "2025.04 - 2025.07",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549488344-1f9b144b2a47?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p1"
+    },
+    {
+      "id": "p2",
+      "category": "cafe",
+      "title": "[부산 북구] 오브제커피 1호점",
+      "period": "2024.09 - 2025.03",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549488344-1f9b144b2a47?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p2"
+    },
+    {
+      "id": "p3",
+      "category": "commercial",
+      "title": "[부산 해운대구] 사진 스튜디오 3호점",
+      "period": "2024.06 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p3"
+    },
+    {
+      "id": "p4",
+      "category": "commercial",
+      "title": "[부산 해운대구] 모바일 스토어 1호점",
+      "period": "2025.09 - 2025.12",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p4"
+    },
+    {
+      "id": "p5",
+      "category": "restaurant",
+      "title": "[부산 수영구] 그릴하우스 2호점",
+      "period": "2024.01 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p5"
+    },
+    {
+      "id": "p6",
+      "category": "restaurant",
+      "title": "[부산 동래구] 비스트로 330 3호점",
+      "period": "2025.01 - 2025.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p6"
+    },
+    {
+      "id": "p7",
+      "category": "cafe",
+      "title": "[부산 남구] 모닝블렌드 2호점",
+      "period": "2024.08 - 2025.02",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p7"
+    },
+    {
+      "id": "p8",
+      "category": "cafe",
+      "title": "[부산 수영구] 루트카페 2호점",
+      "period": "2024.01 - 2024.04",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p8"
+    },
+    {
+      "id": "p9",
+      "category": "restaurant",
+      "title": "[부산 동래구] 스시바 하나 1호점",
+      "period": "2024.04 - 2024.09",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p9"
+    },
+    {
+      "id": "p10",
+      "category": "commercial",
+      "title": "[부산 금정구] 오피스 라운지 3호점",
+      "period": "2025.01 - 2025.02",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p10"
+    },
+    {
+      "id": "p11",
+      "category": "apartment",
+      "title": "[부산 부산진구] 화이트&우드",
+      "period": "2024.06 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p11"
+    },
+    {
+      "id": "p12",
+      "category": "restaurant",
+      "title": "[부산 해운대구] 면옥 2호점",
+      "period": "2024.08 - 2024.08",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1449247709967-d4461a6a6103?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p12"
+    },
+    {
+      "id": "p13",
+      "category": "commercial",
+      "title": "[부산 사하구] 의류 편집샵 2호점",
+      "period": "2024.01 - 2024.01",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p13"
+    },
+    {
+      "id": "p14",
+      "category": "cafe",
+      "title": "[부산 강서구] 브루잉 스테이션 1호점",
+      "period": "2024.05 - 2024.11",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p14"
+    },
+    {
+      "id": "p15",
+      "category": "apartment",
+      "title": "[부산 남구] 주방 개선",
+      "period": "2024.03 - 2024.04",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p15"
+    },
+    {
+      "id": "p16",
+      "category": "commercial",
+      "title": "[부산 수영구] 피트니스 스튜디오 1호점",
+      "period": "2024.07 - 2024.12",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p16"
+    },
+    {
+      "id": "p17",
+      "category": "cafe",
+      "title": "[부산 연제구] 리프 카페 2호점",
+      "period": "2024.07 - 2024.12",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p17"
+    },
+    {
+      "id": "p18",
+      "category": "restaurant",
+      "title": "[부산 동래구] 로스터리키친 1호점",
+      "period": "2025.10 - 2025.10",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p18"
+    },
+    {
+      "id": "p19",
+      "category": "restaurant",
+      "title": "[부산 부산진구] 해산물포차 1호점",
+      "period": "2024.06 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p19"
+    },
+    {
+      "id": "p20",
+      "category": "cafe",
+      "title": "[부산 수영구] 플랫화이트 라운지 3호점",
+      "period": "2025.01 - 2025.03",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p20"
+    },
+
+    {
+      "id": "p21",
+      "category": "commercial",
+      "title": "[부산 북구] 베이커리 쇼룸 2호점",
+      "period": "2024.03 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p21"
+    },
+    {
+      "id": "p22",
+      "category": "cafe",
+      "title": "[부산 연제구] 소호카페 2호점",
+      "period": "2025.06 - 2025.09",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p22"
+    },
+    {
+      "id": "p23",
+      "category": "commercial",
+      "title": "[부산 사하구] 에듀플렉스 1호점",
+      "period": "2024.02 - 2024.03",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p23"
+    },
+    {
+      "id": "p24",
+      "category": "apartment",
+      "title": "[부산 동래구] 수납 최적화",
+      "period": "2024.11 - 2025.01",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p24"
+    },
+    {
+      "id": "p25",
+      "category": "etc",
+      "title": "[부산 해운대구] 갤러리",
+      "period": "2025.05 - 2025.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p25"
+    },
+
+    {
+      "id": "p26",
+      "category": "restaurant",
+      "title": "[부산 강서구] 테이블 다이닝 3호점",
+      "period": "2024.01 - 2024.03",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1449247709967-d4461a6a6103?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p26"
+    },
+    {
+      "id": "p27",
+      "category": "commercial",
+      "title": "[부산 부산진구] 사진 스튜디오 1호점",
+      "period": "2025.01 - 2025.01",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p27"
+    },
+    {
+      "id": "p28",
+      "category": "cafe",
+      "title": "[부산 금정구] 라이트룸 카페 2호점",
+      "period": "2025.05 - 2025.08",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p28"
+    },
+    {
+      "id": "p29",
+      "category": "apartment",
+      "title": "[부산 남구] 리모델링 A타입",
+      "period": "2024.10 - 2024.12",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p29"
+    },
+    {
+      "id": "p30",
+      "category": "restaurant",
+      "title": "[부산 수영구] 노마진푸줏간 2호점",
+      "period": "2024.04 - 2024.09",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p30"
+    },
+
+    {
+      "id": "p31",
+      "category": "cafe",
+      "title": "[부산 해운대구] 브루잉 스테이션 2호점",
+      "period": "2025.06 - 2025.12",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p31"
+    },
+    {
+      "id": "p32",
+      "category": "commercial",
+      "title": "[부산 동래구] 헤어살롱 1호점",
+      "period": "2025.02 - 2025.05",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549488344-1f9b144b2a47?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p32"
+    },
+    {
+      "id": "p33",
+      "category": "restaurant",
+      "title": "[부산 남구] 로스터리키친 2호점",
+      "period": "2024.09 - 2024.11",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p33"
+    },
+    {
+      "id": "p34",
+      "category": "apartment",
+      "title": "[부산 사하구] 모던 아파트",
+      "period": "2025.05 - 2025.10",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p34"
+    },
+    {
+      "id": "p35",
+      "category": "commercial",
+      "title": "[부산 북구] 오피스 라운지 2호점",
+      "period": "2024.02 - 2024.07",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p35"
+    },
+
+    {
+      "id": "p36",
+      "category": "cafe",
+      "title": "[부산 금정구] 루트카페 1호점",
+      "period": "2024.05 - 2024.07",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p36"
+    },
+    {
+      "id": "p37",
+      "category": "restaurant",
+      "title": "[부산 부산진구] 스시바 하나 3호점",
+      "period": "2025.11 - 2026.01",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p37"
+    },
+    {
+      "id": "p38",
+      "category": "commercial",
+      "title": "[부산 해운대구] 의류 편집샵 1호점",
+      "period": "2025.03 - 2025.05",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p38"
+    },
+    {
+      "id": "p39",
+      "category": "apartment",
+      "title": "[부산 연제구] 거실 확장",
+      "period": "2024.03 - 2024.08",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p39"
+    },
+    {
+      "id": "p40",
+      "category": "etc",
+      "title": "[부산 수영구] 팝업스토어",
+      "period": "2025.02 - 2025.05",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p40"
+    },
+
+    {
+      "id": "p41",
+      "category": "restaurant",
+      "title": "[부산 강서구] 그릴하우스 1호점",
+      "period": "2024.08 - 2024.12",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p41"
+    },
+    {
+      "id": "p42",
+      "category": "cafe",
+      "title": "[부산 해운대구] 모닝블렌드 3호점",
+      "period": "2025.02 - 2025.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p42"
+    },
+    {
+      "id": "p43",
+      "category": "commercial",
+      "title": "[부산 남구] 피트니스 스튜디오 3호점",
+      "period": "2025.06 - 2025.08",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p43"
+    },
+    {
+      "id": "p44",
+      "category": "restaurant",
+      "title": "[부산 금정구] 비스트로 330 1호점",
+      "period": "2024.01 - 2024.05",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549488344-1f9b144b2a47?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p44"
+    },
+    {
+      "id": "p45",
+      "category": "apartment",
+      "title": "[부산 동래구] 우드톤 아파트",
+      "period": "2024.08 - 2024.10",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p45"
+    },
+
+    {
+      "id": "p46",
+      "category": "commercial",
+      "title": "[부산 부산진구] 베이커리 쇼룸 3호점",
+      "period": "2025.07 - 2025.11",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p46"
+    },
+    {
+      "id": "p47",
+      "category": "cafe",
+      "title": "[부산 수영구] 라이트룸 카페 1호점",
+      "period": "2024.12 - 2025.05",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p47"
+    },
+    {
+      "id": "p48",
+      "category": "restaurant",
+      "title": "[부산 남구] 해산물포차 3호점",
+      "period": "2025.01 - 2025.05",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p48"
+    },
+    {
+      "id": "p49",
+      "category": "apartment",
+      "title": "[부산 사하구] 리모델링 B타입",
+      "period": "2024.04 - 2024.04",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p49"
+    },
+    {
+      "id": "p50",
+      "category": "etc",
+      "title": "[부산 해운대구] 공방",
+      "period": "2024.05 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p50"
+    },
+
+    {
+      "id": "p51",
+      "category": "commercial",
+      "title": "[부산 북구] 사진 스튜디오 2호점",
+      "period": "2024.10 - 2025.02",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p51"
+    },
+    {
+      "id": "p52",
+      "category": "cafe",
+      "title": "[부산 동래구] 리프 카페 1호점",
+      "period": "2025.03 - 2025.04",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p52"
+    },
+    {
+      "id": "p53",
+      "category": "restaurant",
+      "title": "[부산 연제구] 테이블 다이닝 1호점",
+      "period": "2024.02 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p53"
+    },
+    {
+      "id": "p54",
+      "category": "commercial",
+      "title": "[부산 강서구] 오피스 라운지 1호점",
+      "period": "2024.01 - 2024.06",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1549488344-1f9b144b2a47?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p54"
+    },
+    {
+      "id": "p55",
+      "category": "apartment",
+      "title": "[부산 금정구] 화이트&우드",
+      "period": "2024.09 - 2024.11",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p55"
+    },
+
+    {
+      "id": "p56",
+      "category": "cafe",
+      "title": "[부산 남구] 플랫화이트 라운지 1호점",
+      "period": "2024.02 - 2024.08",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p56"
+    },
+    {
+      "id": "p57",
+      "category": "restaurant",
+      "title": "[부산 수영구] 로스터리키친 3호점",
+      "period": "2025.09 - 2025.11",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p57"
+    },
+    {
+      "id": "p58",
+      "category": "commercial",
+      "title": "[부산 동래구] 모바일 스토어 3호점",
+      "period": "2024.07 - 2024.09",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p58"
+    },
+    {
+      "id": "p59",
+      "category": "apartment",
+      "title": "[부산 부산진구] 주방 개선",
+      "period": "2024.04 - 2024.10",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
+      "to": "/interior/p59"
+    }
+  ]
+}

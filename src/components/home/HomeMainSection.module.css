@@ -1,0 +1,69 @@
+.section {
+  width: 100%;
+}
+
+/* Figma: main padding 100px, gap 48px, width 1720 */
+.inner {
+  width: min(var(--page-max), 100%);
+  margin: 0 auto;
+  padding: 100px var(--page-padding-x);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+/* Figma: 40/48, -0.03em, 500, uppercase, #2E2E2E */
+.title {
+  margin: 0;
+
+  font-family: pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-style: normal;
+  font-weight: 500;
+
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  color: #2E2E2E;
+}
+
+.highlight {
+  color: rgb(122, 106, 90);
+}
+
+/* Figma: 1720 x 730 */
+.heroMedia {
+  width: 100%;
+  max-width: 1720px;
+  aspect-ratio: 1720 / 730;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.imageFallback {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 56px var(--page-padding-x);
+    gap: 28px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+}

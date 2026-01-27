@@ -1,0 +1,22 @@
+/* InteriorPagination.module.css */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #b9b5af;
+  background: transparent;
+  cursor: pointer;
+}
+
+.active {
+  width: 30px;
+  height: 30px;
+  background: #3b332c;
+  color: #f5f3ee;
+  border: 0;
+}

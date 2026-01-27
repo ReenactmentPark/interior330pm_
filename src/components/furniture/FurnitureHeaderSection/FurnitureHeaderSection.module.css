@@ -1,0 +1,74 @@
+.header {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.desc {
+  margin: 12px 0 0;
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #2e2e2e;
+}
+
+.filter {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  gap: 20px;
+  width: 100%;
+}
+
+.filterItem {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  color: #b9b5af;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+}
+
+.filterItem::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+  margin-left: 20px;
+  background: #b9b5af;
+  transform: translateY(2px);
+}
+
+.filterItem:last-child::after {
+  display: none;
+}
+
+.active {
+  color: #7a6a5a;
+}

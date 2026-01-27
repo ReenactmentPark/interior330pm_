@@ -7,28 +7,34 @@ export default function Footer() {
   return (
     <footer className={styles.footer} aria-label="사이트 푸터">
       <div className={styles.inner}>
+        {/* Left: Frame 3 */}
         <div className={styles.left}>
-          {leftLines.map((line) => (
-            <p key={line} className={styles.line}>
-              {line}
-            </p>
-          ))}
+          <p className={styles.address}>
+            {leftLines.map((line, i) => (
+              <span key={`${line}-${i}`}>
+                {line}
+                {i < leftLines.length - 1 ? <br /> : null}
+              </span>
+            ))}
+          </p>
+
           <p className={styles.copy}>{copyright}</p>
         </div>
 
-        <div className={styles.right}>
+        {/* Right: Frame 4 */}
+        <nav className={styles.right} aria-label="푸터 링크">
           {rightLinks.map((l) => (
             <a
-              key={l.label}
-              className={styles.link}
+              key={l.href}
               href={l.href}
+              className={styles.link}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               {l.label}
             </a>
           ))}
-        </div>
+        </nav>
       </div>
     </footer>
   );

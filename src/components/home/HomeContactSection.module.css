@@ -1,0 +1,160 @@
+.section {
+  position: relative;
+  width: 100%;
+  height: 600px;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+/* background image */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+
+  background-image: var(--contact-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: #111;
+  z-index: 0;
+}
+
+/* gradient overlay */
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+
+  background: linear-gradient(
+    360deg,
+    rgba(135, 120, 108, 0) -0.02%,
+    #88786C 87.15%
+  );
+  z-index: 1;
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* wrapper */
+.content {
+  width: min(var(--page-max), 100%);
+  margin: 0 auto;
+  padding: 102px var(--page-padding-x) 160px;
+  box-sizing: border-box;
+}
+
+/* ✅ 그룹 전체(타이틀+설명+버튼) */
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;        /* Figma: 그룹 내 버튼까지 간격 */
+  margin-top: 8px;  /* 🔥 여기로 “그룹 전체”를 내림: 6~12px 추천 */
+}
+
+/* text block */
+.textGroup {
+  width: 310px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* title: 설명 위치 유지하면서 타이틀만 시각적으로 내리기 */
+.title {
+  margin: 0;
+  position: relative;
+  top: 12px;
+  margin-bottom: 19px;
+  font-family: 'Pretendard', "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: -0.03em;
+
+  color: #FFFFFF;
+}
+
+/* description */
+.desc {
+  margin: 0;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 250;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+
+  color: #FFFFFF;
+}
+
+/* CTA button */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 20px;
+  gap: 10px;
+
+  width: 135px;
+  height: 49px;
+
+  background: #3B332C;
+  border-radius: 100px;
+
+  text-decoration: none;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .section {
+    height: 520px;
+  }
+
+  .content {
+    padding: 72px var(--page-padding-x) 96px;
+  }
+
+  .textGroup {
+    width: 100%;
+    max-width: 310px;
+  }
+
+  .group {
+    margin-top: 6px;
+    gap: 24px;
+  }
+
+  .title {
+    top: 10px;
+  }
+}

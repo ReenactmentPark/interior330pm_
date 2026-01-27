@@ -1,57 +1,64 @@
-export type ImageAsset = {
-  url: string;
-  alt?: string;
-};
-
-export type FooterLink = {
-  label: string;
-  href: string;
-};
-
+///////////////////////////
+// Home Page Types ////////
+///////////////////////////
 export type HomeApiResponse = {
   page: 'home';
   version: number;
   updatedAt: string;
   sections: {
     images: {
-      hero: ImageAsset;
-      cards: ImageAsset[]; // length 4 권장
+      hero: { url: string; alt?: string | null };
+      cards: Array<{ url: string; alt?: string | null }>;
     };
-    cardText: {
+
+    heroText: {
       title: string;
-      highlight?: string;
-      highlightColor?: string;
-      description: string; // \n 허용
+      highlight?: string | null;
+      highlightColor?: string | null;
     };
+
+    galleryText: {
+      title: string;
+      highlight?: string | null;
+      highlightColor?: string | null;
+      description: string;
+    };
+
     cta: {
-      background?: ImageAsset;
+      background?: { url?: string | null } | null;
       title: string;
-      description: string; // \n 허용
-      button: {
-        label: string;
-        to: string;
-      };
+      description: string;
+      button: { label: string; to: string };
     };
-};
-  footer?: {
+
+    footer?: {
       leftLines: string[];
-      rightLinks: FooterLink[];
+      rightLinks: Array<{ label: string; href: string }>;
       copyright: string;
+    } | null;
   };
 };
 
-/** UI 컴포넌트용 ViewModel */
+export type HighlightVm = { text: string; color?: string } | null;
+
 export type HomePageViewModel = {
   images: {
     heroUrl: string;
     heroAlt: string;
-    cards: { url: string; alt: string; raised?: boolean }[];
+    cards: Array<{ url: string; alt: string; raised?: boolean }>;
   };
-  cardText: {
+
+  heroText: {
     title: string;
-    highlight?: { text: string; color?: string };
+    highlight: HighlightVm;
+  };
+
+  galleryText: {
+    title: string;
+    highlight: HighlightVm;
     description: string;
   };
+
   cta: {
     backgroundUrl?: string;
     title: string;
@@ -59,9 +66,57 @@ export type HomePageViewModel = {
     buttonLabel: string;
     buttonTo: string;
   };
+
   footer?: {
     leftLines: string[];
-    rightLinks: FooterLink[];
+    rightLinks: Array<{ label: string; href: string }>;
     copyright: string;
   };
 };
+
+///////////////////////////
+// Interior Page Types ////
+///////////////////////////
+
+export type InteriorCategoryKey = 'all' | 'cafe' | 'restaurant' | 'commercial' | 'apartment' | 'etc';
+
+export type InteriorCategory = {
+  key: InteriorCategoryKey;
+  label: string;
+};
+
+export type InteriorProject = {
+  id: string;
+  category: InteriorCategoryKey;
+  title: string;
+  period: string;
+  thumbnailUrl: string;
+  to: string;
+};
+
+export type InteriorHeaderText = {
+  title: string;
+  description: string;
+};
+
+export type InteriorApiResponse = {
+  page: 'interior';
+  version: number;
+  updatedAt: string;
+  headerText: InteriorHeaderText;
+  categories: InteriorCategory[];
+  projects: InteriorProject[];
+};
+
+export type InteriorPageViewModel = {
+  headerText: InteriorHeaderText;
+  categories: InteriorCategory[];
+  projects: InteriorProject[];
+};
+
+///////////////////////////
+// Furniture Page Types ////
+///////////////////////////
+
+export type FurnitureApiResponse = InteriorApiResponse;
+export type FurniturePageViewModel = InteriorPageViewModel;

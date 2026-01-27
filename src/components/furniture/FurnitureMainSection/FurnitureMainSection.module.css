@@ -1,0 +1,16 @@
+.section {
+  width: 100%;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+.inner {
+  width: min(var(--page-max), 100%);
+  margin: 0 auto;
+  padding: 100px var(--page-padding-x);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}

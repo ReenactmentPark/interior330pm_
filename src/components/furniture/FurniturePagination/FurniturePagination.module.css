@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+}
+
+.pageBtn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #b9b5af;
+  background: transparent;
+  color: #b9b5af;
+  cursor: pointer;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageNumber {
+  width: 30px;
+  height: 30px;
+  background: #3b332c;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #f5f3ee;
+}

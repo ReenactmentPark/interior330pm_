@@ -1,64 +1,104 @@
 .footer {
-  padding: 28px 0;
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.75);
-  background: transparent;
+  width: 100%;
+  background: #ffffff;
+  color: #000;
 }
 
+/* footer: padding 40px 100px, width는 페이지 컨테이너(1920) 기준 */
 .inner {
-  padding: 0 5%;
-  box-sizing: border-box;
+  width: min(var(--page-max), 100%);
+  margin: 0 auto;
 
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
   justify-content: space-between;
-  gap: 24px;
+  align-items: flex-start;
+
+  padding: 40px var(--page-padding-x);
+  gap: 20px;
+
+  box-sizing: border-box;
 }
 
+/* Frame 3 */
 .left {
-  min-width: 0;
+  width: 380px;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.line {
-  margin: 0 0 6px;
-  line-height: 1.6;
-  color: rgba(0, 0, 0, 0.72);
+/* 47582 ... (2줄 블록) */
+.address {
+  margin: 0;
+
+  width: 100%;
+
+  font-family: pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-style: normal;
+  font-weight: 400;
+
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+
+  color: #000000;
 }
 
+/* ⓒ */
 .copy {
-  margin: 18px 0 0;
-  line-height: 1.6;
-  color: rgba(0, 0, 0, 0.62);
+  margin: 0;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.02em;
+
+  color: #000000;
 }
 
+/* Frame 4 */
 .right {
-  display: inline-flex;
-  gap: 24px;
-  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+
 }
 
+/* Instagram / Kakaotalk */
 .link {
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.75);
-}
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
 
-.link:visited {
-  color: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.02em;
+
+  color: #000000;
+  text-decoration: none;
 }
 
 .link:hover {
   text-decoration: underline;
 }
 
-/* 모바일 */
 @media (max-width: 768px) {
   .inner {
+    padding: 24px var(--page-padding-x);
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .right {
-    margin-top: 14px;
-    gap: 16px;
+  .left {
+    width: 100%;
   }
 }

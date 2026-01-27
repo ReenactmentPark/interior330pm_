@@ -3,31 +3,65 @@
 }
 
 .nav {
-  padding: 0 5%;
+  padding: 0 var(--page-padding-x);
   display: flex;
-  align-items: center;        /* 수직 중앙 정렬 */
-  justify-content: space-between; /* 좌 / 우 끝 배치 */
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+  margin-bottom: 26px;
 }
 
-.logo img {
-  height: 53px;
+/* 로고 영역: 전체 클릭 가능 */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* SVG 로고 크기 제어 (기존 img height:53px 대응) */
+.logoSvg {
+  height: auto;
+  width: 158px;
   display: block;
 }
 
 .menu {
-    display: flex;
-    gap: 16px;
-    color: black;
-    
+  display: flex;
+  gap: 40px;
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: 24px;
 }
 
+/* 기본 링크 */
 .menu a {
   white-space: nowrap;
   word-break: keep-all;
   text-decoration: none;
+  color: #2E2E2E;
 }
 
+/* ✅ visited는 기본 링크 색을 그대로 유지 (inherit 금지) */
 .menu a:visited {
-  color: inherit;
+  color: #2E2E2E;
   text-decoration: none;
+}
+
+/* ✅ active는 항상 이 색 */
+.menu a:global(.active),
+.menu a:global(.active):visited {
+  color: #7A6A5A;
+}
+
+/* hover */
+.menu a:hover {
+  color: #2E2E2E;
+}
+
+/* ✅ active hover도 유지 */
+.menu a:global(.active):hover {
+  color: #7A6A5A;
 }
