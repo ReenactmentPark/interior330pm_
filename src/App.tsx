@@ -5,10 +5,16 @@ import Interior from '@/pages/Interior/Interior';
 import Furniture from '@/pages/Furniture/Furniture';
 import Inquiry from '@/pages/Inquiry/Inquiry';
 
+import AdminRouter from '@/admin/routes/AdminRouter';
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* admin은 Layout 밖에서 별도 라우팅 */}
+        <Route path="/admin/*" element={<AdminRouter />} />
+
+        {/* public */}
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/interior" element={<Interior />} />

@@ -1,0 +1,49 @@
+.section {
+  width: 100%;
+}
+
+.inner {
+  width: min(var(--page-max), 100%);
+  margin: 0 auto;
+  padding: 100px var(--page-padding-x);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.title {
+  margin: 0;
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #2E2E2E;
+}
+
+.highlight {
+  color: rgb(122, 106, 90);
+}
+
+.heroMedia {
+  width: 100%;
+  max-width: 1720px;
+  aspect-ratio: 1720 / 730;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.imageFallback {
+  width: 100%;
+  height: 100%;
+}

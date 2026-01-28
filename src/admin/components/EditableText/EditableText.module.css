@@ -1,0 +1,44 @@
+.wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* ✅ 기존 타이포는 className이 담당. 여기선 깨지지 않게만 */
+.editable {
+  outline: none;
+}
+
+/* 액션 버튼이 레이아웃 밀지 않게 */
+.actions {
+  position: absolute;
+  right: -90px; /* 필요하면 숫자 조절 */
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn {
+  height: 28px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #3b332c;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btnGhost {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(0,0,0,0.75);
+  font-size: 12px;
+  cursor: pointer;
+}

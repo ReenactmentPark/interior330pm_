@@ -1,0 +1,90 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg-main);
+  color: var(--text-main);
+  position: relative;
+}
+
+/* 가로 중앙 + 세로 3/7 위치 */
+.box {
+  position: absolute;
+  left: 50%;
+  top: calc(100vh * 3 / 7);
+  transform: translate(-50%, -50%);
+
+  width: min(520px, calc(100% - 48px));
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* ✅ admin/password 간격 좁게 */
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  column-gap: 14px;
+}
+
+.label {
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2e2e2e;
+  text-transform: lowercase;
+}
+
+.input {
+  height: 38px;
+  padding: 0 12px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.14);
+  background: #fff;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 400;
+  font-size: 14px;
+  color: #111;
+
+  outline: none;
+}
+
+.input:focus {
+  border-color: rgba(122, 106, 90, 0.75);
+  box-shadow: 0 0 0 3px rgba(122, 106, 90, 0.15);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end; /* ✅ 로그인 버튼 오른쪽 정렬 느낌 */
+  margin-top: 8px;
+}
+
+.loginBtn {
+  height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+
+  background: #3b332c;
+  color: #fff;
+  cursor: pointer;
+
+  font-family: Pretendard, "Pretendard Variable", "Noto Sans KR", Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.loginBtn:active {
+  transform: translateY(1px);
+}

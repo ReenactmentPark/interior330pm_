@@ -3,10 +3,7 @@ import Loading from '@/components/common/Loading';
 import { getHomePage } from '@/services/page.service';
 import type { HomeApiResponse, HomePageViewModel, HighlightVm } from '@/types/page';
 import { HomePageProvider } from './HomePageContext';
-
-import HomeMainSection from '@/components/home/HomeMainSection';
-import HomeGallerySection from '@/components/home/HomeGallerySection';
-import HomeContactSection from '@/components/home/HomeContactSection';
+import HomeMainSection from '@/components/home/HomeMainSection/HomeMainSection';
 
 type LoadState =
   | { status: 'loading' }
@@ -101,8 +98,6 @@ export default function Home() {
       {vm && (
         <HomePageProvider value={vm}>
           <HomeMainSection />
-          <HomeGallerySection />
-          <HomeContactSection />
         </HomePageProvider>
       )}
     </>

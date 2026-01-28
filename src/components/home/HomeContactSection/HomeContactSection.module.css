@@ -2,7 +2,6 @@
   position: relative;
   width: 100%;
   height: 600px;
-
   display: flex;
   align-items: flex-start;
 }
@@ -23,6 +22,7 @@
 
   background-color: #111;
   z-index: 0;
+  pointer-events: none;
 }
 
 /* gradient overlay */
@@ -40,19 +40,18 @@
     #88786C 87.15%
   );
   z-index: 1;
+  pointer-events: none;
 }
 
 .overlay {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
-
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
-/* wrapper */
 .content {
   width: min(var(--page-max), 100%);
   margin: 0 auto;
@@ -60,31 +59,46 @@
   box-sizing: border-box;
 }
 
-/* ✅ 그룹 전체(타이틀+설명+버튼) */
+.bgEditor {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 컨택은 wrap:hover가 아니라 섹션 hover로 강제 */
+.section:hover .bgEditor :global(.editable-image__overlayBtn) {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.section:hover .bgEditor :global(.editable-image__actions) {
+  pointer-events: auto !important;
+}
+
 .group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 28px;        /* Figma: 그룹 내 버튼까지 간격 */
-  margin-top: 8px;  /* 🔥 여기로 “그룹 전체”를 내림: 6~12px 추천 */
+  gap: 28px;
+  margin-top: 8px;
 }
 
-/* text block */
 .textGroup {
   width: 310px;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
 }
 
-/* title: 설명 위치 유지하면서 타이틀만 시각적으로 내리기 */
 .title {
   margin: 0;
   position: relative;
   top: 12px;
   margin-bottom: 19px;
+
   font-family: 'Pretendard', "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -95,7 +109,6 @@
   color: #FFFFFF;
 }
 
-/* description */
 .desc {
   margin: 0;
 
@@ -105,11 +118,10 @@
   font-size: 18px;
   line-height: 140%;
   letter-spacing: -0.03em;
-
+  white-space: pre-line;
   color: #FFFFFF;
 }
 
-/* CTA button */
 .button {
   display: inline-flex;
   align-items: center;
