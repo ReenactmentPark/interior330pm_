@@ -10,7 +10,7 @@ import {
   createCommand,
   type LexicalCommand,
 } from 'lexical';
-import { $createImageNode, type ImagePayload, $isImageNode } from './ImageNode';
+import { $createImageNode, type ImagePayload } from './ImageNode';
 
 export const INSERT_IMAGE_COMMAND: LexicalCommand<ImagePayload> = createCommand('INSERT_IMAGE_COMMAND');
 
@@ -47,7 +47,7 @@ export default function ImagesPlugin() {
           }
 
           // selection 없을 때는 그냥 끝에 붙임
-          const root = editor.getEditorState()._nodeMap.get('root'); // fallback 방지용
+          //const root = editor.getEditorState()._nodeMap.get('root'); // fallback 방지용
           // 위는 내부 접근이라 사용 안 함. 대신 selection 없으면 $insertNodes가 noop일 수 있으니:
           $insertNodes([imageNode, $createParagraphNode()]);
         });
