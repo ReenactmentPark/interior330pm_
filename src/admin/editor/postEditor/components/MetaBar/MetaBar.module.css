@@ -1,0 +1,52 @@
+/* src/admin/editor/postEditor/components/MetaBar/MetaBar.module.css */
+.wrap {
+  border-radius: 18px;
+  padding: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+  align-items: center;
+}
+
+.field {
+  min-width: 0;
+}
+
+.control {
+  width: 100%;
+  height: 54px;
+  border-radius: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.88);
+  background: #fff;
+  padding: 0 16px;
+
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.88);
+
+  outline: none;
+}
+
+.control::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.control:focus {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.disabled {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

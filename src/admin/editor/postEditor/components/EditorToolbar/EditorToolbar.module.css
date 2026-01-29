@@ -1,0 +1,256 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+}
+
+.iconBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.9;
+}
+
+.selectBtn {
+  height: 36px;
+  min-width: 0px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selectBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.selectText {
+  font-size: 14px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.88);
+  white-space: nowrap;
+}
+
+.caret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.6);
+}
+
+.boldBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.boldBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.boldOn {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Overlay ===== */
+.overlayRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+}
+
+.menu {
+  position: fixed;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.menuTitle {
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 900;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.menuList {
+  max-height: 320px;
+  overflow: auto;
+}
+
+/* 공통 메뉴 아이템(체크 + 아이콘 + 텍스트) */
+.menuItem {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  display: grid;
+  grid-template-columns: 22px 22px 1fr;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.88);
+  text-align: left;
+}
+
+.menuItem:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.menuItemActive {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.check {
+  display: inline-flex;
+  justify-content: center;
+  color: #2e7d32;
+  font-weight: 900;
+}
+
+.itemIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.85;
+}
+
+.itemText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 기존 ImageMenu에서 쓰는 단일 버튼 유지 */
+.menuItemSingle {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.88);
+  text-align: left;
+}
+
+.menuItemSingle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* ===========================
+   ColorMenu (RGB)
+   =========================== */
+.colorMenu {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.colorRow {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.colorRow2 {
+  display: grid;
+  grid-template-columns: 60px 22px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.colorLabel {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.colorInput {
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0 10px;
+  outline: none;
+  font-size: 13px;
+  background: #fff;
+}
+
+.colorPreview {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.colorPreviewText {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.colorApply {
+  height: 36px;
+  border-radius: 12px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.colorApply:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

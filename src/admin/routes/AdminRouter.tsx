@@ -9,6 +9,7 @@ import Home from '@/pages/Home/Home';
 import Interior from '@/pages/Interior/Interior';
 import Furniture from '@/pages/Furniture/Furniture';
 
+import AdminPostEditorPage from '@/admin/pages/AdminPostEditorPage/AdminPostEditorPage';
 import AdminInteriorPostEditor from '@/admin/pages/AdminInteriorPostEditor/AdminInteriorPostEditor';
 import AdminFurniturePostEditor from '@/admin/pages/AdminFurniturePostEditor/AdminFurniturePostEditor';
 
@@ -25,7 +26,10 @@ export default function AdminRoutes() {
           <Route path="interior" element={<Interior />} />
           <Route path="furniture" element={<Furniture />} />
 
-          {/* ✅ 3번에서 필요한 글쓰기(에디터) 라우트 */}
+          {/* ✅ 공용 글쓰기(에디터) */}
+          <Route path="editor" element={<AdminPostEditorPage />} />
+
+          {/* ✅ 기존 주소 호환(안전/리다이렉트용) */}
           <Route path="interior/editor" element={<AdminInteriorPostEditor />} />
           <Route path="furniture/editor" element={<AdminFurniturePostEditor />} />
 

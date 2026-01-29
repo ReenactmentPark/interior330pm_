@@ -1,0 +1,41 @@
+.wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.figure {
+  position: relative;
+  margin: 0;
+  width: 100%;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.selected {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
+.resizeHandle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.br {
+  right: -6px;
+  bottom: -6px;
+  cursor: nwse-resize;
+}

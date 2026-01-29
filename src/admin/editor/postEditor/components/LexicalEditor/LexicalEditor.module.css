@@ -1,0 +1,41 @@
+.panel {
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  padding: 14px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.06);
+}
+
+.editorShell {
+  width: 100%;
+  min-height: 420px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  padding: 18px 18px;
+  position: relative;
+}
+
+.content {
+  min-height: 384px;
+  outline: none;
+
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 1.65;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.placeholder {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 700;
+  font-size: 15px;
+}
