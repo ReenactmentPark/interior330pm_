@@ -12,6 +12,9 @@
   --page-padding-x: clamp(24px, calc(var(--vw) * 5.2085), 100px);
 }
 
+html {
+  scrollbar-gutter: stable;
+}
 
 body {
   background-color: var(--bg-main);
