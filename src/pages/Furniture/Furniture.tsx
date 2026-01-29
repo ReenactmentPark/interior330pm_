@@ -15,7 +15,6 @@ type LoadState =
 function mapFurnitureApiToViewModel(api: FurnitureApiResponse): FurniturePageViewModel {
   return {
     headerText: api.headerText,
-    categories: api.categories,
     projects: api.projects,
   };
 }

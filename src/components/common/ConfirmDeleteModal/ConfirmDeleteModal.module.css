@@ -1,0 +1,93 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+}
+
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.backdropClickCatcher {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: default;
+}
+
+.panel {
+  position: relative;
+  width: min(520px, calc(100vw - 40px));
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  padding: 26px 26px 22px;
+  z-index: 1;
+  text-align: center;
+}
+
+.titlePill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 16px;
+}
+
+.message {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgba(0, 0, 0, 0.88);
+  margin-bottom: 18px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.danger,
+.cancel {
+  height: 48px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 800;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.danger {
+  background: rgba(255, 59, 48, 0.12);
+  color: rgba(180, 20, 14, 1);
+  border-color: rgba(255, 59, 48, 0.22);
+}
+
+.danger:hover {
+  background: rgba(255, 59, 48, 0.18);
+}
+
+.cancel {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.cancel:hover {
+  background: rgba(0, 0, 0, 0.06);
+}

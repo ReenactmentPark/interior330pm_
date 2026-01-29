@@ -2,6 +2,7 @@
 .header {
   width: 100%;
   text-align: center;
+  position: relative;
 }
 
 .title {
@@ -29,6 +30,14 @@
   gap: 20px;
 
   width: 100%;
+}
+
+.createPostBtnWrap {
+  position: absolute;
+  right: 0;
+  top: 80%;
+  transform: translateY(-10%); /* ✅ 중앙정렬 헤더에 예쁘게 */
+  z-index: 2;
 }
 
 /* 카테고리 버튼 */

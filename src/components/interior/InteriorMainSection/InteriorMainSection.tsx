@@ -1,25 +1,35 @@
-import { useMemo, useState } from 'react';
-import styles from './InteriorMainSection.module.css';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useInteriorPage } from '@/pages/Interior/InteriorPageContext';
 import type { InteriorCategoryKey } from '@/types/page';
+import { useEditMode } from '@/admin/context/EditModeContext';
 
 import InteriorHeaderSection from '@/components/interior/InteriorHeaderSection/InteriorHeaderSection';
 import InteriorThumbSection from '@/components/interior/InteriorThumbSection/InteriorThumbSection';
 import InteriorPagination from '@/components/interior/InteriorPagination/InteriorPagination';
+import styles from './InteriorMainSection.module.css';
 
 const PAGE_SIZE = 8;
 
 export default function InteriorMainSection() {
+  const { pathname } = useLocation();
   const vm = useInteriorPage();
+  const { enabled } = useEditMode();
   if (!vm) return null;
+
+  const [projects, setProjects] = useState(vm.projects);
+
+  useEffect(() => {
+    setProjects(vm.projects);
+  }, [vm.projects]);
 
   const [category, setCategory] = useState<InteriorCategoryKey>('all');
   const [page, setPage] = useState(1);
 
   const filteredProjects = useMemo(() => {
-    if (category === 'all') return vm.projects;
-    return vm.projects.filter((p) => p.category === category);
-  }, [vm.projects, category]);
+    if (category === 'all') return projects;
+    return projects.filter((p) => p.category === category);
+  }, [projects, category]);
 
   const totalCount = filteredProjects.length;
   const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
@@ -30,10 +40,23 @@ export default function InteriorMainSection() {
     return filteredProjects.slice(start, start + PAGE_SIZE);
   }, [filteredProjects, safePage]);
 
+  const isAdminInterior = pathname.startsWith('/admin/interior');
+
   const onChangeCategory = (k: InteriorCategoryKey) => {
     setCategory(k);
     setPage(1);
   };
+
+  const onDelete = enabled
+    ? (id: string) => {
+        setProjects((prev) => prev.filter((p) => p.id !== id));
+      }
+    : undefined;
+
+  // 삭제로 totalPages 줄면 page 보정
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
 
   return (
     <section className={styles.section} aria-label="인테리어">
@@ -46,7 +69,7 @@ export default function InteriorMainSection() {
           onChangeCategory={onChangeCategory}
         />
 
-        <InteriorThumbSection projects={pageItems} />
+        <InteriorThumbSection projects={pageItems} onDelete={onDelete} />
 
         <InteriorPagination
           page={safePage}

@@ -1,5 +1,8 @@
+import { useLocation } from 'react-router-dom';
 import styles from './InteriorHeaderSection.module.css';
 import type { InteriorCategoryKey, InteriorCategory } from '@/types/page';
+import { useEditMode } from '@/admin/context/EditModeContext';
+import AdminCreatePostButton from '@/admin/components/AdminCreatePostButton/AdminCreatePostButton';
 
 type Props = {
   title: string;
@@ -16,8 +19,17 @@ export default function InteriorHeaderSection({
   activeCategory,
   onChangeCategory,
 }: Props) {
+  const { enabled } = useEditMode();
+  const { pathname } = useLocation();
+  const isAdminInterior = pathname.startsWith('/admin/interior');
+  const showCreate = isAdminInterior && enabled;
   return (
     <header className={styles.header}>
+      {showCreate && (
+        <div className={styles.createPostBtnWrap}>
+          <AdminCreatePostButton to="/admin/interior/editor" />
+        </div>
+      )}
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.desc}>{description}</p>
 

@@ -1,6 +1,7 @@
 .header {
   width: 100%;
   text-align: center;
+  position: relative
 }
 
 .title {
@@ -71,4 +72,12 @@
 
 .active {
   color: #7a6a5a;
+}
+
+.createPostBtnWrap {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-10%); /* ✅ 중앙정렬 헤더에 예쁘게 */
+  z-index: 2;
 }

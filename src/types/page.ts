@@ -118,5 +118,25 @@ export type InteriorPageViewModel = {
 // Furniture Page Types ////
 ///////////////////////////
 
-export type FurnitureApiResponse = InteriorApiResponse;
-export type FurniturePageViewModel = InteriorPageViewModel;
+export type FurnitureProject = {
+  id: string;
+  title: string;
+  period: string;
+  thumbnailUrl: string;
+  to: string;
+};
+
+export type FurnitureHeaderText = InteriorHeaderText
+
+export type FurnitureApiResponse = {
+  page: 'furniture';
+  version: number;
+  updatedAt: string;
+  headerText: FurnitureHeaderText;
+  projects: FurnitureProject[];
+};
+
+export type FurniturePageViewModel = {
+  headerText: FurnitureHeaderText;
+  projects: FurnitureProject[];
+};
