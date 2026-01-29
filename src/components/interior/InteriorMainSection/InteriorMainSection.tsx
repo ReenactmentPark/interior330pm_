@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useInteriorPage } from '@/pages/Interior/InteriorPageContext';
 import type { InteriorCategoryKey } from '@/types/page';
 import { useEditMode } from '@/admin/context/EditModeContext';
@@ -12,7 +11,6 @@ import styles from './InteriorMainSection.module.css';
 const PAGE_SIZE = 8;
 
 export default function InteriorMainSection() {
-  const { pathname } = useLocation();
   const vm = useInteriorPage();
   const { enabled } = useEditMode();
   if (!vm) return null;
@@ -39,8 +37,6 @@ export default function InteriorMainSection() {
     const start = (safePage - 1) * PAGE_SIZE;
     return filteredProjects.slice(start, start + PAGE_SIZE);
   }, [filteredProjects, safePage]);
-
-  const isAdminInterior = pathname.startsWith('/admin/interior');
 
   const onChangeCategory = (k: InteriorCategoryKey) => {
     setCategory(k);

@@ -1,52 +1,59 @@
-// src/components/board/BoardListSection/BoardListSection.tsx
 import { Link } from 'react-router-dom';
-import { useMemo, useState } from 'react';
 import styles from './BoardListSection.module.css';
-import InteriorPagination from '@/components/interior/InteriorPagination/InteriorPagination';
-import type { InteriorProject } from '@/types/page';
 
-type Props = {
-  kind: 'interior' | 'furniture';
-  items: InteriorProject[];
+type Kind = 'interior' | 'furniture';
+
+type BaseItem = {
+  id: string;
+  title: string;
+  period?: string;
+  thumbnailUrl?: string;
+  to?: string;
 };
 
-const PAGE_SIZE = 10;
+type Props<T extends BaseItem> = {
+  kind: Kind;
+  items: T[];
+};
 
-export default function BoardListSection({ kind, items }: Props) {
-  const [page, setPage] = useState(1);
+function getHref(kind: Kind, item: BaseItem) {
+  // 1) 데이터에 to가 있으면 그걸 우선
+  if (item.to) return item.to;
 
-  const totalCount = items.length;
+  // 2) 없으면 kind 기준으로 생성
+  return `/${kind}/${item.id}`;
+}
 
-  const sliced = useMemo(() => {
-    const start = (page - 1) * PAGE_SIZE;
-    return items.slice(start, start + PAGE_SIZE);
-  }, [items, page]);
+export default function BoardListSection<T extends BaseItem>({ kind, items }: Props<T>) {
+  if (!items || items.length === 0) return null;
 
   return (
-    <section className={styles.section} aria-label="게시글 목록">
-      <div className={styles.headerRow}>
-        <h2 className={styles.title}>목록</h2>
-        <Link className={styles.all} to={`/${kind}`}>
-          전체보기
-        </Link>
-      </div>
-
-      <div className={styles.table}>
-        {sliced.map((p) => (
-          <Link key={p.id} to={p.to} className={styles.row}>
-            <span className={styles.rowTitle}>{p.title}</span>
-            <span className={styles.rowMeta}>{p.period}</span>
+    <section className={styles.section} aria-label="목록">
+      <div className={styles.inner}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>목록</h2>
+          <Link className={styles.more} to={`/${kind}`}>
+            전체보기
           </Link>
-        ))}
-      </div>
+        </div>
 
-      <InteriorPagination
-        page={page}
-        totalCount={totalCount}
-        pageSize={PAGE_SIZE}
-        maxButtons={5}
-        onChange={setPage}
-      />
+        <div className={styles.grid}>
+          {items.slice(0, 8).map((it) => (
+            <Link key={it.id} to={getHref(kind, it)} className={styles.card}>
+              {it.thumbnailUrl ? (
+                <img className={styles.thumb} src={it.thumbnailUrl} alt="" loading="lazy" />
+              ) : (
+                <div className={styles.thumbFallback} />
+              )}
+
+              <div className={styles.meta}>
+                <div className={styles.cardTitle}>{it.title}</div>
+                {it.period ? <div className={styles.cardSub}>{it.period}</div> : null}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useFurniturePage } from '@/pages/Furniture/FurniturePageContext';
 import { useEditMode } from '@/admin/context/EditModeContext';
 
@@ -14,7 +13,6 @@ const PAGE_SIZE = 8;
 export default function FurnitureMainSection() {
   
   const vm = useFurniturePage();
-  const { pathname } = useLocation();
   const { enabled } = useEditMode();
 
   if (!vm) return null;
@@ -47,8 +45,6 @@ export default function FurnitureMainSection() {
   useEffect(() => {
     if (page > totalPages) setPage(totalPages);
   }, [page, totalPages]);
-
-  const isAdminFurniture = pathname.startsWith('/admin/furniture');
 
   return (
     <section className={styles.section} aria-label="가구제작">
