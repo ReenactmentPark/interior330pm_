@@ -88,8 +88,11 @@ function parseInlineStyle(styleText: string): { fontSize?: number; fontFamilyLab
   return res;
 }
 
-function normalizeFontFamilyLabel(label: string): string {
-  return label === '기본서체' ? '' : label;
+function normalizeFontFamilyLabel(family: string): string {
+  const f = (family || '').trim();
+  if (!f) return '';
+  // 공백 포함 family 안전 처리
+  return f.includes(' ') ? `"${f}"` : f;
 }
 
 function styleTextToMap(styleText: string): Record<string, string> {
@@ -309,11 +312,11 @@ const LexicalEditorImpl = forwardRef<LexicalEditorHandle, Props>(function Lexica
     const api: LexicalEditorHandle = {
       focus: () => composerEditorRef.current?.focus(),
       applyBold: () => composerEditorRef.current?.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold'),
-      applyFontFamily: (fontFamilyLabel: string) => {
-        const ff = normalizeFontFamilyLabel(fontFamilyLabel);
+      applyFontFamily: (family: string) => {
+        const ff = normalizeFontFamilyLabel(family);
         const ed = composerEditorRef.current;
         if (!ed) return;
-        applyInlineStyle(ed, { 'font-family': ff });
+        applyInlineStyle(ed, { 'font-family': ff }); // ff가 ''이면 제거됨
       },
       applyFontSize: (fontSize: number) => {
         const ed = composerEditorRef.current;

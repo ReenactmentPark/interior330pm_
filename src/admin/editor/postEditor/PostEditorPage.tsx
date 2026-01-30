@@ -81,9 +81,9 @@ export default function PostEditorPage() {
   const [selStyle, setSelStyle] = useState<EditorSelectionStyle>({
     bold: false,
     fontFamilyLabel: '기본서체',
-    fontSize: 15,
+    fontSize: 13,
     align: 'left',
-    color: 'black'
+    color: '#2E2E2E'
   });
 
   /**

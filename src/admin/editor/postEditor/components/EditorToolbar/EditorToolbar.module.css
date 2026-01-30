@@ -167,7 +167,7 @@
 
 .itemText {
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
 }
 
@@ -236,7 +236,7 @@
 }
 
 .colorPreviewText {
-  font-size: 12px;
+  font-size: 18px;
   color: rgba(0, 0, 0, 0.7);
 }
 

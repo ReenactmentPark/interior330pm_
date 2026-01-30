@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './BoardListSection.module.css';
+import { useMemo, useState } from 'react';
+import InteriorPagination from '@/components/interior/InteriorPagination/InteriorPagination';
 
 type Kind = 'interior' | 'furniture';
 
@@ -7,7 +9,6 @@ type BaseItem = {
   id: string;
   title: string;
   period?: string;
-  thumbnailUrl?: string;
   to?: string;
 };
 
@@ -24,36 +25,44 @@ function getHref(kind: Kind, item: BaseItem) {
   return `/${kind}/${item.id}`;
 }
 
-export default function BoardListSection<T extends BaseItem>({ kind, items }: Props<T>) {
-  if (!items || items.length === 0) return null;
+const PAGE_SIZE = 5;
 
+export default function BoardListSection<T extends BaseItem>({ kind, items }: Props<T>) {
+  const [page, setPage] = useState(1);
+
+  const totalCount = items.length;
+
+  const sliced = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return items.slice(start, start + PAGE_SIZE);
+  }, [items, page]);
   return (
-    <section className={styles.section} aria-label="목록">
+    <section className={styles.section} aria-label="게시글 목록">
       <div className={styles.inner}>
         <div className={styles.header}>
           <h2 className={styles.title}>목록</h2>
-          <Link className={styles.more} to={`/${kind}`}>
+          <Link className={styles.overview} to={`/${kind}`}>
             전체보기
           </Link>
         </div>
 
-        <div className={styles.grid}>
-          {items.slice(0, 8).map((it) => (
-            <Link key={it.id} to={getHref(kind, it)} className={styles.card}>
-              {it.thumbnailUrl ? (
-                <img className={styles.thumb} src={it.thumbnailUrl} alt="" loading="lazy" />
-              ) : (
-                <div className={styles.thumbFallback} />
-              )}
-
-              <div className={styles.meta}>
-                <div className={styles.cardTitle}>{it.title}</div>
-                {it.period ? <div className={styles.cardSub}>{it.period}</div> : null}
-              </div>
+        <div className={styles.table}>
+          {sliced.map((p) => (
+            <Link key={p.id} to={getHref(kind, p)} className={styles.row}>
+              <span className={styles.rowTitle}>{p.title}</span>
+              <span className={styles.rowMeta}>{p.period}</span>
             </Link>
           ))}
         </div>
       </div>
+
+      <InteriorPagination
+        page={page}
+        totalCount={totalCount}
+        pageSize={PAGE_SIZE}
+        maxButtons={5}
+        onChange={setPage}
+      />
     </section>
   );
 }

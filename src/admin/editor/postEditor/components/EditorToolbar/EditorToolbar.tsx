@@ -13,6 +13,9 @@ import SizeMenu from './menus/SizeMenu';
 import AlignMenu from './menus/AlignMenu';
 import ColorMenu from './menus/ColorMenu';
 
+import { loadFontOnce } from '@/utils/fontLoader';
+import { FONT_OPTIONS, FONT_DEFS, fontCssToLabel } from './constants/fonts';
+
 export type TextAlign = 'left' | 'center' | 'right';
 
 type Props = {
@@ -64,6 +67,25 @@ export default function EditorToolbar({
   const alignIcon =
     align === 'center' ? alignCenterIcon : align === 'right' ? alignRightIcon : alignLeftIcon;
 
+  async function applyFontByLabel(label: (typeof FONT_OPTIONS)[number]) {
+    const def = FONT_DEFS[label];
+    if (!def) return;
+
+    // ✅ 1) 먼저 Lexical에 적용 (selection 살아있을 때)
+    // 기본서체면 ''로 보내서 font-family 제거
+    const family = def.family === 'inherit' ? '' : def.family;
+    onPickFont(family);
+
+    // ✅ 2) 폰트 로딩은 뒤에서 비동기로 (요청 발생)
+    if (def.srcUrl && def.family !== 'inherit') {
+      void loadFontOnce({
+        family: def.family,
+        srcUrl: def.srcUrl,
+        descriptors: { style: 'normal', weight: '400' },
+      }).catch(() => {});
+    }
+  }
+
   return (
     <div className={styles.bar} aria-label="본문 편집 툴바">
       {/* ================== 이미지(카메라) ================== */}
@@ -92,7 +114,7 @@ export default function EditorToolbar({
         aria-label="서체"
         title="서체"
       >
-        <span className={styles.selectText}>{fontLabel}</span>
+        <span className={styles.selectText}>{fontCssToLabel(fontLabel)}</span>
         <span className={styles.caret} aria-hidden />
       </button>
 
@@ -152,18 +174,18 @@ export default function EditorToolbar({
       </button>
 
       {/* ================== Overlay Menus ================== */}
-      <OverlayMenu open={openMenu === 'font'} anchorEl={anchors.current.font} onClose={close} width={240}>
+      <OverlayMenu open={openMenu === 'font'} anchorEl={anchors.current.font} onClose={close} width={220}>
         <FontMenu
           current={fontLabel}
           onMouseDownItem={preventFocusSteal}
-          onPick={(font) => {
-            onPickFont(font);
+          onPick={async (label) => {
+            await applyFontByLabel(label);
             close();
           }}
         />
       </OverlayMenu>
 
-      <OverlayMenu open={openMenu === 'size'} anchorEl={anchors.current.size} onClose={close} width={140}>
+      <OverlayMenu open={openMenu === 'size'} anchorEl={anchors.current.size} onClose={close} width={115}>
         <SizeMenu
           current={sizeLabel}
           onMouseDownItem={preventFocusSteal}
@@ -185,7 +207,7 @@ export default function EditorToolbar({
         />
       </OverlayMenu>
 
-      <OverlayMenu open={openMenu === 'align'} anchorEl={anchors.current.align} onClose={close} width={170}>
+      <OverlayMenu open={openMenu === 'align'} anchorEl={anchors.current.align} onClose={close} width={130}>
         <AlignMenu
           current={align}
           onMouseDownItem={preventFocusSteal}

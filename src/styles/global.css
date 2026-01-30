@@ -2,7 +2,7 @@
 
 :root {
   --bg-main: rgb(245, 243, 238);
-  --text-main: #111;
+  --text-main: #2E2E2E;
     /* 스크롤바 제외 1vw (JS에서 주입) */
   --vw: 1vw;
   --sbw: 0px;

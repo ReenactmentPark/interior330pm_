@@ -125,7 +125,7 @@ export default function ColorMenu({ current, onMouseDownItem, onPick }: Props) {
   }, [invalid, commitInput, onPick, previewCss]);
 
   return (
-    <div className={styles.colorMenu} onMouseDown={onMouseDownItem}>
+    <div className={styles.colorMenu}>
       <div className={styles.colorRow}>
         <div className={styles.colorLabel}>RGB</div>
         <input
@@ -147,7 +147,7 @@ export default function ColorMenu({ current, onMouseDownItem, onPick }: Props) {
       <div className={styles.colorRow2}>
         <div className={styles.colorLabel}>미리보기</div>
         <div className={styles.colorPreview} style={{ background: previewCss }} />
-        <div className={styles.colorPreviewText}>{previewCss}</div>
+        <div className={styles.colorPreviewText} style={{ color: previewCss }}>예시 색상 AaBbCcDd</div>
       </div>
 
       <button
