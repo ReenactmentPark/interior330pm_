@@ -174,7 +174,7 @@ export default function EditorToolbar({
         />
       </OverlayMenu>
 
-      <OverlayMenu open={openMenu === 'color'} anchorEl={anchors.current.color} onClose={close} width={340}>
+      <OverlayMenu open={openMenu === 'color'} anchorEl={anchors.current.color} onClose={close} width={290}>
         <ColorMenu
           current={colorLabel}
           onMouseDownItem={preventFocusSteal}

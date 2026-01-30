@@ -357,7 +357,12 @@ const LexicalEditorImpl = forwardRef<LexicalEditorHandle, Props>(function Lexica
       <div className={styles.panel} aria-label="본문 편집">
         <div className={styles.editorShell}>
           <RichTextPlugin
-            contentEditable={<ContentEditable className={styles.content} />}
+            contentEditable={<ContentEditable 
+              className={styles.content} 
+              spellCheck={false} 
+              autoCorrect="off"
+              autoCapitalize="off"
+            />}
             placeholder={<div className={styles.placeholder}>내용을 입력하세요.</div>}
             ErrorBoundary={LexicalErrorBoundary}
           />

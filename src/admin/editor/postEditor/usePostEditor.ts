@@ -6,8 +6,7 @@ const makeEmptyDraft = (kind: EditorKind): PostDraft => ({
   kind,
   title: '',
   period: '',
-  thumbnailUrl: '',
-  category: kind === 'interior' ? 'all' : undefined,
+  category: undefined,
   content: { type: 'lexical', value: EMPTY_LEXICAL_STATE_JSON },
   updatedAt: new Date().toISOString(),
 });
@@ -82,7 +81,6 @@ export function usePostEditor(kind: EditorKind) {
   const validateAndPublish = useCallback((): PublishResult => {
     if (!draft.title.trim()) return { ok: false, message: '제목을 입력하세요.' };
     if (!draft.period.trim()) return { ok: false, message: '기간을 입력하세요.' };
-    if (!draft.thumbnailUrl.trim()) return { ok: false, message: '썸네일 URL을 입력하세요.' };
     if (draft.kind === 'interior' && !draft.category) return { ok: false, message: '카테고리를 선택하세요.' };
 
     const plain = extractPlainTextFromLexicalJSON(draft.content.value);

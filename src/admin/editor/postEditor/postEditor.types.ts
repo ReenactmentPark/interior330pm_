@@ -56,7 +56,6 @@ export type PostDraft = {
 
   title: string;
   period: string;
-  thumbnailUrl: string;
 
   // interior만 사용
   category?: InteriorCategoryKey;

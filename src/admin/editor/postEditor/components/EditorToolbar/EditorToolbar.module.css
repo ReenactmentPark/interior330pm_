@@ -254,3 +254,36 @@
   opacity: 0.35;
   cursor: not-allowed;
 }
+
+.colorPickerWrap {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* react-colorful 전체 영역 크기 */
+.colorPickerWrap :global(.react-colorful) {
+  width: 100%;
+  height: 210px; /* 1번 이미지 비율 */
+}
+
+/* 하단 레인보우 바 높이 */
+.colorPickerWrap :global(.react-colorful__hue),
+.colorPickerWrap :global(.react-colorful__alpha) {
+  height: 16px;
+}
+
+/* 미리보기 텍스트 줄바꿈 방지 */
+.colorPreviewText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ✅ 적용 버튼 텍스트 중앙 정렬 (핵심) */
+.colorApply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}

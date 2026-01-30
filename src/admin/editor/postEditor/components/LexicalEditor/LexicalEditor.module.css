@@ -13,21 +13,21 @@
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
-  padding: 18px 18px;
+  padding: 0px 18px;
   position: relative;
 }
 
 .content {
   min-height: 384px;
   outline: none;
-
   font-size: 15px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.88);
   line-height: 1.65;
-
   white-space: pre-wrap;
   word-break: break-word;
+  position: relative;
+  z-index: 2;
 }
 
 .placeholder {
@@ -38,4 +38,15 @@
   color: rgba(0, 0, 0, 0.45);
   font-weight: 700;
   font-size: 15px;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+.content :global(p) {
+  margin: 0;
+}
+
+/* 추가 */
+.content {
+  padding-top: 16px;
 }
