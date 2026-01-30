@@ -71,7 +71,6 @@ function migrateDraft(kind: EditorKind, raw: any): PostDraft {
   const nextKind: EditorKind = raw?.kind === 'furniture' ? 'furniture' : 'interior';
   const title = String(raw?.title ?? '');
   const period = String(raw?.period ?? '');
-  const thumbnailUrl = String(raw?.thumbnailUrl ?? '');
   const category = raw?.category;
   const updatedAt = String(raw?.updatedAt ?? new Date().toISOString());
 
