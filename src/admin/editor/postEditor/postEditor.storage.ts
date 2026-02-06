@@ -2,9 +2,6 @@ import type { EditorKind, PostDraft } from './postEditor.types';
 
 const keyOf = (kind: EditorKind) => `admin:post-editor:draft:${kind}`;
 
-/**
- * Minimal Lexical editorState JSON for an empty editor.
- */
 export const EMPTY_LEXICAL_STATE_JSON = JSON.stringify({
   root: {
     children: [
@@ -71,23 +68,27 @@ function migrateDraft(kind: EditorKind, raw: any): PostDraft {
   const nextKind: EditorKind = raw?.kind === 'furniture' ? 'furniture' : 'interior';
   const title = String(raw?.title ?? '');
   const period = String(raw?.period ?? '');
+
+  // ✅ v2: thumbnailImageUid
+  // - 구버전(thumbnailUrl)은 URL을 저장했었음(로컬 blob URL 포함 가능)
+  // - 지금 스키마는 imageUid 기반이므로, 구버전 값은 기본적으로 무시하고 빈 값으로 시작
+  const thumbnailImageUid = String(raw?.thumbnailImageUid ?? '');
   const category = raw?.category;
   const updatedAt = String(raw?.updatedAt ?? new Date().toISOString());
 
-  // New schema
   const maybeContent = raw?.content;
   if (maybeContent?.type === 'lexical' && typeof maybeContent.value === 'string' && maybeContent.value.trim()) {
     return {
       kind: nextKind,
       title,
       period,
+      thumbnailImageUid,
       category,
       content: { type: 'lexical', value: maybeContent.value },
       updatedAt,
     };
   }
 
-  // Legacy schema: blocks[] → plain text → lexical
   const blocks = Array.isArray(raw?.blocks) ? raw.blocks : [];
   const legacyText = blocks
     .map((b: any) => (typeof b?.text === 'string' ? b.text : ''))
@@ -100,6 +101,7 @@ function migrateDraft(kind: EditorKind, raw: any): PostDraft {
     kind,
     title,
     period,
+    thumbnailImageUid,
     category,
     content: { type: 'lexical', value },
     updatedAt,

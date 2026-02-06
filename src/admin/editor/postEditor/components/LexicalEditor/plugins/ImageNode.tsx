@@ -13,18 +13,21 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
 
 import styles from './ImageNode.module.css';
+import { useThumbnail } from '../thumbnailContext';
 
 export type ImagePayload = {
+  imageUid: string;
   src: string;
   altText?: string;
-  width?: number; // px
-  height?: number; // px
+  width?: number;
+  height?: number;
 };
 
 type SerializedImageNode = Spread<
   {
     type: 'image';
     version: 1;
+    imageUid: string;
     src: string;
     altText: string;
     width: number;
@@ -42,17 +45,19 @@ export class ImageNode extends DecoratorNode<ReactNode> {
   __altText: string;
   __width: number;
   __height: number;
+  __imageUid: string;
 
   static getType(): string {
     return 'image';
   }
 
   static clone(node: ImageNode): ImageNode {
-    return new ImageNode(node.__src, node.__altText, node.__width, node.__height, node.__key);
+    return new ImageNode(node.__imageUid,node.__src, node.__altText, node.__width, node.__height, node.__key);
   }
 
-  constructor(src: string, altText: string, width: number, height: number, key?: NodeKey) {
+  constructor(imageUid: string,src: string, altText: string, width: number, height: number, key?: NodeKey) {
     super(key);
+    this.__imageUid = imageUid;
     this.__src = src;
     this.__altText = altText;
     this.__width = width;
@@ -60,14 +65,15 @@ export class ImageNode extends DecoratorNode<ReactNode> {
   }
 
   static importJSON(serializedNode: SerializedImageNode): ImageNode {
-    const { src, altText, width, height } = serializedNode;
-    return $createImageNode({ src, altText, width, height });
+    const { imageUid, src, altText, width, height } = serializedNode;
+    return $createImageNode({ imageUid, src, altText, width, height });
   }
 
   exportJSON(): SerializedImageNode {
     return {
       type: 'image',
       version: 1,
+      imageUid: this.__imageUid,
       src: this.__src,
       altText: this.__altText,
       width: this.__width,
@@ -77,6 +83,7 @@ export class ImageNode extends DecoratorNode<ReactNode> {
 
   exportDOM(): DOMExportOutput {
     const img = document.createElement('img');
+    img.setAttribute('data-image-uid', this.__imageUid);
     img.setAttribute('src', this.__src);
     img.setAttribute('alt', this.__altText);
     if (this.__width) img.setAttribute('width', String(this.__width));
@@ -103,6 +110,7 @@ export class ImageNode extends DecoratorNode<ReactNode> {
     return (
       <ImageComponent
         nodeKey={this.getKey()}
+        imageUid={this.__imageUid}
         src={this.__src}
         altText={this.__altText}
         width={this.__width}
@@ -117,7 +125,7 @@ export function $createImageNode(payload: ImagePayload): ImageNode {
   const altText = payload.altText ?? '';
   const width = payload.width ?? 0;
   const height = payload.height ?? 0;
-  return $applyNodeReplacement(new ImageNode(src, altText, width, height));
+  return $applyNodeReplacement(new ImageNode(payload.imageUid, src, altText, width, height));
 }
 
 export function $isImageNode(node: unknown): node is ImageNode {
@@ -126,18 +134,22 @@ export function $isImageNode(node: unknown): node is ImageNode {
 
 function ImageComponent({
   nodeKey,
+  imageUid,
   src,
   altText,
   width,
   height,
 }: {
   nodeKey: NodeKey;
+  imageUid: string;
   src: string;
   altText: string;
   width: number;
   height: number;
 }) {
   const [editor] = useLexicalComposerContext();
+  const { thumbnailImageUid, setThumbnailImageUid } = useThumbnail();
+  const isThumb = thumbnailImageUid === imageUid;
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const [isSelected, setSelected, clearSelection] = useLexicalNodeSelection(nodeKey);
@@ -150,9 +162,11 @@ function ImageComponent({
     return s;
   }, [width, height]);
 
-  const onClick: React.MouseEventHandler = (e) => {
+  const onPointerDown: React.MouseEventHandler = (e) => {
     if (isResizing) return;
     e.preventDefault();
+    e.stopPropagation();
+
     if (!e.shiftKey) {
       clearSelection();
       setSelected(true);
@@ -221,8 +235,36 @@ function ImageComponent({
           className={className}
           style={sizeStyle}
           draggable={false}
-          onClick={onClick}
+          onClick={onPointerDown}
+          data-image-uid={imageUid}
         />
+        {isSelected && (
+          <div className={styles.thumbBar}>
+            {isThumb && <span className={styles.thumbBadge}>대표</span>}
+
+            <button
+              type="button"
+              className={styles.thumbBtn}
+              onPointerDown={(e) => {
+                // ✅ selection/drag 깨지지 않게
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // ✅ 대표 지정 (대표는 반드시 1개 유지하고 싶으면 토글 막아도 됨)
+                setThumbnailImageUid(imageUid);
+              }}
+              aria-label="대표 이미지로 지정"
+              title="대표 이미지로 지정"
+              disabled={isThumb}
+            >
+              {isThumb ? '대표 이미지' : '대표로 지정'}
+            </button>
+          </div>
+        )}
         {isSelected && (
           <span
             className={`${styles.resizeHandle} ${styles.br}`}

@@ -30,12 +30,15 @@ import { $patchStyleText } from '@lexical/selection';
 
 import type { TextAlign } from '../../postEditor.types';
 import styles from './LexicalEditor.module.css';
+import { ThumbnailProvider } from './thumbnailContext';
 
 import ImagesPlugin, { INSERT_IMAGE_COMMAND } from './plugins/ImagesPlugin';
 import ImageDragDropPastePlugin from './plugins/ImageDragDropPastePlugin';
 import { ImageNode } from './plugins/ImageNode';
 
+
 import { $getSelectionStyleValueForProperty } from '@lexical/selection';
+
 export type EditorSelectionStyle = {
   bold: boolean;
   fontFamilyLabel: string;
@@ -59,8 +62,14 @@ type Props = {
   onChange: (nextJson: string) => void;
   onSelectionStyleChange: (style: EditorSelectionStyle) => void;
 
-  pickImage: () => Promise<string | null>;
-  uploadImage: (file: File) => Promise<string>;
+  thumbnailImageUid: string;
+  onThumbnailImageUidChange: (next: string) => void;
+
+  //  이미지 삽입(버튼 클릭)
+  pickImageFile: () => Promise<File | null>;
+
+  //  로컬 이미지 등록(스토어에 넣고, 미리보기 src + imageUid 발급)
+  registerLocalImage: (file: File) => { imageUid: string; src: string };
 };
 
 function parseInlineStyle(styleText: string): { fontSize?: number; fontFamilyLabel?: string } {
@@ -286,7 +295,15 @@ function SelectionStylePlugin({ onSelectionStyleChange }: { onSelectionStyleChan
 }
 
 const LexicalEditorImpl = forwardRef<LexicalEditorHandle, Props>(function LexicalEditorImpl(
-  { value, onChange, onSelectionStyleChange, pickImage, uploadImage },
+  {
+    value,
+    onChange,
+    onSelectionStyleChange,
+    thumbnailImageUid,
+    onThumbnailImageUidChange,
+    pickImageFile,
+    registerLocalImage,
+  },
   ref
 ) {
   const composerEditorRef = useRef<LexicalEditor | null>(null);
@@ -327,11 +344,20 @@ const LexicalEditorImpl = forwardRef<LexicalEditorHandle, Props>(function Lexica
       requestInsertImage: () => {
         const ed = composerEditorRef.current;
         if (!ed) return;
+
         void (async () => {
-          const url = await pickImage();
-          if (!url) return;
+          const file = await pickImageFile();
+          if (!file) return;
+
+          const { imageUid, src } = registerLocalImage(file);
+          if (!thumbnailImageUid) onThumbnailImageUidChange(imageUid);
+          
           ed.focus();
-          ed.dispatchCommand(INSERT_IMAGE_COMMAND, { src: url, altText: '' });
+          ed.dispatchCommand(INSERT_IMAGE_COMMAND, {
+            imageUid,
+            src,
+            altText: file.name,
+          });
         })();
       },
       applyColor: (cssColor: string) => {
@@ -343,7 +369,7 @@ const LexicalEditorImpl = forwardRef<LexicalEditorHandle, Props>(function Lexica
 
     handleRef.current = api;
     return api;
-  }, [pickImage]);
+  }, [pickImageFile, registerLocalImage]);
 
   function CaptureEditorPlugin() {
     const [editor] = useLexicalComposerContext();
@@ -356,38 +382,44 @@ const LexicalEditorImpl = forwardRef<LexicalEditorHandle, Props>(function Lexica
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <CaptureEditorPlugin />
+      <ThumbnailProvider
+        value={{
+          thumbnailImageUid,
+          setThumbnailImageUid: onThumbnailImageUidChange,
+        }}
+      >
+        <div className={styles.panel} aria-label="본문 편집">
+          <div className={styles.editorShell}>
+            <RichTextPlugin
+              contentEditable={<ContentEditable 
+                className={styles.content} 
+                spellCheck={false} 
+                autoCorrect="off"
+                autoCapitalize="off"
+              />}
+              placeholder={<div className={styles.placeholder}>내용을 입력하세요.</div>}
+              ErrorBoundary={LexicalErrorBoundary}
+            />
 
-      <div className={styles.panel} aria-label="본문 편집">
-        <div className={styles.editorShell}>
-          <RichTextPlugin
-            contentEditable={<ContentEditable 
-              className={styles.content} 
-              spellCheck={false} 
-              autoCorrect="off"
-              autoCapitalize="off"
-            />}
-            placeholder={<div className={styles.placeholder}>내용을 입력하세요.</div>}
-            ErrorBoundary={LexicalErrorBoundary}
-          />
+            <HistoryPlugin />
+            <ShiftEnterParagraphPlugin />
 
-          <HistoryPlugin />
-          <ShiftEnterParagraphPlugin />
+            <ImagesPlugin />
+            <ImageDragDropPastePlugin registerLocalImage={registerLocalImage} />
 
-          <ImagesPlugin />
-          <ImageDragDropPastePlugin uploadImage={uploadImage} />
+            <OnChangePlugin
+              onChange={(editorState: EditorState) => {
+                const nextJson = JSON.stringify(editorState.toJSON());
+                lastEmittedRef.current = nextJson;
+                onChange(nextJson);
+              }}
+            />
 
-          <OnChangePlugin
-            onChange={(editorState: EditorState) => {
-              const nextJson = JSON.stringify(editorState.toJSON());
-              lastEmittedRef.current = nextJson;
-              onChange(nextJson);
-            }}
-          />
-
-          <SyncExternalValuePlugin value={value} lastEmittedRef={lastEmittedRef} />
-          <SelectionStylePlugin onSelectionStyleChange={onSelectionStyleChange} />
+            <SyncExternalValuePlugin value={value} lastEmittedRef={lastEmittedRef} />
+            <SelectionStylePlugin onSelectionStyleChange={onSelectionStyleChange} />
+          </div>
         </div>
-      </div>
+      </ThumbnailProvider>
     </LexicalComposer>
   );
 });

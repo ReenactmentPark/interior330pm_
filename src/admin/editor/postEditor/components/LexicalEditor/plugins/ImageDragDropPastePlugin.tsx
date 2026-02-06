@@ -1,13 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { INSERT_IMAGE_COMMAND } from './ImagesPlugin';
+import { useThumbnail } from '../thumbnailContext';
+
 
 export default function ImageDragDropPastePlugin({
-  uploadImage,
+  registerLocalImage,
 }: {
-  uploadImage: (file: File) => Promise<string>;
+  registerLocalImage: (file: File) => { imageUid: string; src: string };
 }) {
   const [editor] = useLexicalComposerContext();
+  const { thumbnailImageUid, setThumbnailImageUid } = useThumbnail();
+  const thumbRef = useRef(thumbnailImageUid);
+  useEffect(() => {
+    thumbRef.current = thumbnailImageUid;
+  }, [thumbnailImageUid]);
 
   useEffect(() => {
     const cleanup = editor.registerRootListener((rootElement, prevRootElement) => {
@@ -26,7 +33,6 @@ export default function ImageDragDropPastePlugin({
 
     return cleanup;
 
-    // ✅ EventListener 시그니처 유지 (반드시 Event -> void)
     function onDragOver(e: Event) {
       const ev = e as DragEvent;
       if (!ev.dataTransfer) return;
@@ -46,16 +52,11 @@ export default function ImageDragDropPastePlugin({
       ev.preventDefault();
       editor.focus();
 
-      void (async () => {
-        for (const file of imageFiles) {
-          try {
-            const url = await uploadImage(file);
-            editor.dispatchCommand(INSERT_IMAGE_COMMAND, { src: url, altText: file.name });
-          } catch (err) {
-            console.error('[ImageDragDropPastePlugin] upload failed:', err);
-          }
-        }
-      })();
+      for (const file of imageFiles) {
+        const { imageUid, src } = registerLocalImage(file);
+        if (!thumbRef.current) setThumbnailImageUid(imageUid);
+        editor.dispatchCommand(INSERT_IMAGE_COMMAND, { imageUid, src, altText: file.name });
+      }
     }
 
     function onPaste(e: Event) {
@@ -67,20 +68,15 @@ export default function ImageDragDropPastePlugin({
       ev.preventDefault();
       editor.focus();
 
-      void (async () => {
-        for (const it of imageItems) {
-          const file = it.getAsFile();
-          if (!file) continue;
-          try {
-            const url = await uploadImage(file);
-            editor.dispatchCommand(INSERT_IMAGE_COMMAND, { src: url, altText: file.name });
-          } catch (err) {
-            console.error('[ImageDragDropPastePlugin] upload failed:', err);
-          }
-        }
-      })();
+      for (const it of imageItems) {
+        const file = it.getAsFile();
+        if (!file) continue;
+        const { imageUid, src } = registerLocalImage(file);
+        if (!thumbRef.current) setThumbnailImageUid(imageUid);
+        editor.dispatchCommand(INSERT_IMAGE_COMMAND, { imageUid, src, altText: file.name });
+      }
     }
-  }, [editor, uploadImage]);
+  }, [editor, registerLocalImage]);
 
   return null;
 }
