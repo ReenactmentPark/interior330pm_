@@ -1,5 +1,4 @@
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
 import styles from './Header.module.css';
 import HomeLogo from '@/assets/icons/330pm_logo.svg?react';
 import { useAdminAuth } from '@/admin/context/AdminAuthContext';
