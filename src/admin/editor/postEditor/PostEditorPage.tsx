@@ -14,6 +14,7 @@ import LexicalEditor, { type LexicalEditorHandle, type EditorSelectionStyle } fr
 import { extractImageUidsFromLexicalJSON, extractUniqueImageUids } from './postEditor.lexicalImages';
 
 const isEditorKind = (v: string | null): v is EditorKind => v === 'interior' || v === 'furniture';
+const API = import.meta.env.VITE_API_BASE_URL;
 
 function pickImageFileViaDialog(): Promise<File | null> {
   return new Promise((resolve) => {
@@ -117,7 +118,7 @@ export default function PostEditorPage() {
     editor.reset();
   };
 
-  const onSave = () => {
+  const onSave = async () => {
     const res = editor.validateAndPublish();
     if (!res.ok) return showToast(res.message, 2200);
     // ✅ validateAndPublish가 assetRefs를 리턴하도록 만든 상태라면 이걸 그대로 사용
@@ -134,8 +135,11 @@ export default function PostEditorPage() {
     // 2) FormData 생성
     const form = new FormData();
     form.append('draft', JSON.stringify(res.draft));
-    form.append('assetRefs', JSON.stringify(assetRefs));
-    form.append('thumbnailImageUid', res.draft.thumbnailImageUid);
+    //form.append('assetRefs', JSON.stringify(assetRefs));
+
+    if (res.draft.thumbnailImageUid) {
+      form.append('thumbnailImageUid', res.draft.thumbnailImageUid);
+    }
 
     // 3) 파일 첨부: assetRefs 기준으로만 업로드(본문에서 삭제된 파일은 제외)
     for (const uid of assetRefs) {
@@ -154,11 +158,26 @@ export default function PostEditorPage() {
       filesCount: assetRefs.length,
     });
     showToast('FormData 준비 완료 (console 확인)');
+    
+    const token = localStorage.getItem('admin_token');
+    const resp = await fetch(`${API}/api/admin/posts/publish`, {
+      method: 'POST',
+        headers: {
+          authorization: token ? `Bearer ${token}` : '',
+        },
+      body: form,
+    });
 
-    // ✅ 서버 붙이면 이 부분만 열어라
-    // const r = await fetch('/api/posts', { method: 'POST', body: form });
-    // if (!r.ok) return showToast('저장 실패', 2200);
-    // showToast('저장 완료');
+    if (!resp.ok) {
+      const text = await resp.text().catch(() => '');
+      showToast(`저장 실패: ${resp.status}`, 2200);
+      console.error(text);
+      throw new Error(`publish failed: ${resp.status} ${text}`);
+    }
+
+    const data = await resp.json();
+    console.log('[PostEditor] publish success:', data);
+    showToast('게시글 저장 완료');
   };
 
   return (

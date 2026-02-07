@@ -28,17 +28,9 @@ export default function Header() {
   const menus = isAdmin ? adminMenus : publicMenus;
   const logoHref = isAdmin ? '/admin/home' : '/';
 
-  const pendingLogoutRef = useRef(false);
-  useEffect(() => {
-    if (pendingLogoutRef.current && !location.pathname.startsWith('/admin')) {
-      pendingLogoutRef.current = false;
-      logout();
-    }
-  }, [location.pathname, logout]);
-
   const onLogout = () => {
-    pendingLogoutRef.current = true;
-    navigate('/', { replace: true });
+    logout();
+    navigate('/admin/login', { replace: true });
   };
 
   return (

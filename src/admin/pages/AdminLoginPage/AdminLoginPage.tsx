@@ -1,27 +1,51 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminLoginPage.module.css';
-import { useAdminAuth } from '@/admin/context/AdminAuthContext';
 
 export default function AdminLoginPage() {
   const navigate = useNavigate();
-  const { login } = useAdminAuth();
 
   const [admin, setAdmin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const API = import.meta.env.VITE_API_BASE_URL;
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setIsLoading(true);
 
-    const ok = login(admin, password);
-    if (!ok) {
-      setError('아이디 또는 비밀번호가 올바르지 않습니다.');
-      return;
+    try {
+      const resp = await fetch(`${API}/api/admin/auth/login`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ admin_id: admin, password }),
+      });
+
+      if (!resp.ok) {
+        // 서버가 401/400 등을 주면 여기로
+        const text = await resp.text().catch(() => '');
+        console.error(text);
+        setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+        return;
+      }
+
+      const data: { ok: boolean; token: string } = await resp.json();
+      if (!data?.token) {
+        setError('로그인 응답이 올바르지 않습니다.');
+        return;
+      }
+
+      localStorage.setItem('admin_token', data.token);
+      navigate('/admin/home', { replace: true });
+    } catch (err) {
+      console.error(err);
+      setError('네트워크 오류가 발생했습니다.');
+    } finally {
+      setIsLoading(false);
     }
-
-    navigate('/admin/home', { replace: true });
   };
 
   return (
@@ -65,8 +89,8 @@ export default function AdminLoginPage() {
           )}
 
           <div className={styles.actions}>
-            <button type="submit" className={styles.loginBtn}>
-              로그인
+            <button type="submit" className={styles.loginBtn} disabled={isLoading}>
+              {isLoading ? '로그인 중...' : '로그인'}
             </button>
           </div>
         </form>
