@@ -1,54 +1,96 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
-type AdminAuthContextValue = {
+type LoginResult = { ok: true } | { ok: false; message: string };
+
+type AdminAuthValue = {
+  token: string | null;
   isAuthenticated: boolean;
-  login: (id: string, password: string) => boolean;
+  login: (adminId: string, password: string) => Promise<LoginResult>;
   logout: () => void;
+  authHeader: () => Record<string, string>;
 };
 
-const STORAGE_KEY = 'admin_auth';
+const AdminAuthContext = createContext<AdminAuthValue | null>(null);
 
-const DEFAULT_AUTH: AdminAuthContextValue = {
-  isAuthenticated: false,
-  login: () => false,
-  logout: () => {},
-};
+const STORAGE_KEY = '330pm_admin_token';
 
-const AdminAuthContext = createContext<AdminAuthContextValue>(DEFAULT_AUTH);
-
-function mockVerify(id: string, password: string) {
-  return id.trim() === 'admin' && password.trim() === '330pm';
+function getApiBase() {
+  const base = import.meta.env.VITE_API_BASE_URL || '';
+  return base.replace(/\/$/, '');
+}
+function url(path: string) {
+  const base = getApiBase();
+  if (!base) return path; // 개발 중 상대경로도 허용
+  return `${base}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
 export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
-  // ✅ 새로고침해도 유지
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem(STORAGE_KEY) === '1';
+  const [token, setToken] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch {
+      return null;
+    }
   });
 
-  const value = useMemo<AdminAuthContextValue>(() => {
+  const isAuthenticated = !!token;
+
+  const value = useMemo<AdminAuthValue>(() => {
     return {
+      token,
       isAuthenticated,
 
-      login: (id, password) => {
-        const ok = mockVerify(id, password);
-        if (ok) {
-          localStorage.setItem(STORAGE_KEY, '1');
-          setIsAuthenticated(true);
+      async login(adminId: string, password: string): Promise<LoginResult> {
+        try {
+          const resp = await fetch(url('/api/admin/auth/login'), {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            // ✅ 쿠키 안 쓰니까 credentials 넣지 마
+            body: JSON.stringify({ admin_id: adminId, password }),
+          });
+
+          if (!resp.ok) {
+            const text = await resp.text().catch(() => '');
+            return { ok: false, message: `로그인 실패 (${resp.status}) ${text}`.trim() };
+          }
+
+          const data = (await resp.json()) as { ok?: boolean; token?: string };
+          if (!data?.token) {
+            return { ok: false, message: '서버 응답에 token이 없습니다.' };
+          }
+
+          try {
+            localStorage.setItem(STORAGE_KEY, data.token);
+          } catch {}
+          setToken(data.token);
+
+          return { ok: true };
+        } catch (e) {
+          console.error('[admin login] failed', e);
+          return { ok: false, message: '네트워크 오류(콘솔 확인)' };
         }
-        return ok;
       },
 
-      logout: () => {
-        localStorage.removeItem(STORAGE_KEY);
-        setIsAuthenticated(false);
+      logout() {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {}
+        setToken(null);
+      },
+
+      authHeader() {
+        const h: Record<string, string> = {};
+        if (token) h.Authorization = `Bearer ${token}`;
+        return h;
       },
     };
-  }, [isAuthenticated]);
+  }, [token, isAuthenticated]);
 
   return <AdminAuthContext.Provider value={value}>{children}</AdminAuthContext.Provider>;
 }
 
 export function useAdminAuth() {
-  return useContext(AdminAuthContext);
+  const ctx = useContext(AdminAuthContext);
+  if (!ctx) throw new Error('useAdminAuth must be used within AdminAuthProvider');
+  return ctx;
 }
